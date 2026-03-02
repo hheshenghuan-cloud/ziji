@@ -1,2 +1,5 @@
 payload:
   - "+.diyhh.cn"
+  - "+.mtalk.google.com"
+  - "+.fcm.googleapis.com"
+  - "+.firebaseinstallations.googleapis.com"
