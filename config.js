@@ -100,7 +100,6 @@
     'RULE-SET,cn_ip,国内网络',
     'RULE-SET,zijign,国内网络',
     'RULE-SET,googlefcm,GoogleFCM',
-    'DOMAIN-SUFFIX,push.apple.com,GoogleFCM',
     'RULE-SET,fakeipfilter_domain,国内网络',
     'RULE-SET,ai,ChatGPT',
     'RULE-SET,github_domain,GitHub',
