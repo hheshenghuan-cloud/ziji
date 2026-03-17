@@ -13,7 +13,6 @@
     'unified-delay': true,
     'tcp-concurrent': true,
     'log-level': 'warning',
-    'global-client-fingerprint': 'chrome',
     'keep-alive-idle': 600,
     'keep-alive-interval': 15,
     'external-controller': '0.0.0.0:9090',
@@ -93,6 +92,7 @@
   ];
 
   next.rules = [
+    'PROCESS-NAME,com.tencent.ig,默认代理',
     'RULE-SET,ziji,默认代理',
     'RULE-SET,private_ip,国内网络,no-resolve',
     'RULE-SET,private_domain,国内网络',
