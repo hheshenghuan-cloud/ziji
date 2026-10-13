@@ -51,96 +51,93 @@ const main = (config) => {
     ]
   },
   "tun": {
-    "enable": true,
-    "stack": "mixed",
+    "启用": true,
+    "堆栈""混合",
     "dns-hijack": [
       "any:53",
       "tcp://any:53"
     ]
   },
   "dns": {
-    "enable": true,
-    "cache-algorithm": "arc",
-    "listen": "0.0.0.0:1053",
+    "启用": true,
+    "缓存算法": "arc",
+    "监听": "0.0.0.0:1053",
     "ipv6": false,
     "respect-rules": true,
-    "enhanced-mode": "fake-ip",
-    "fake-ip-range": "198.18.0.1/16",
+    "增强模式": "假IP",
+    "假IP范围""198.18.0.1/16"
     "fake-ip-filter-mode": "blacklist",
     "direct-nameserver-follow-policy": true,
     "nameserver-policy": {
-      "rule-set:googlefcm": [
+      "规则集:googlefcm"[
         "https://8.8.8.8/dns-query#默认代理"
       ]
     },
-    "default-nameserver": [
+    "默认名称服务器": [
       "https://223.5.5.5/dns-query"
     ],
-    "proxy-server-nameserver": [
+    "代理服务器名称服务器": [
       "https://dns.alidns.com/dns-query",
       "https://doh.pub/dns-query"
     ],
-    "direct-nameserver": [
+    "直接名称服务器"[
       "https://dns.alidns.com/dns-query",
       "https://doh.pub/dns-query"
     ],
     "nameserver": [
       "https://8.8.8.8/dns-query"
     ],
-    "fake-ip-filter": [
+    "假IP过滤器"[
       "+.push.apple.com",
       "mtalk.google.com",
-      "rule-set:fakeipfilter_domain",
-      "rule-set:private_domain",
-      "rule-set:cn_domain",
-      "rule-set:zijign"
+      "规则集:fakeipfilter_domain"
     ]
   },
-  "proxy-groups": [
+  "代理组": [
     {
-      "name": "默认代理",
-      "type": "select",
+      "名称": "默认代理",
+      "类型": "选择",
       "include-all": true,
-      "proxies": [
-        "DIRECT"
+      "代理": [
+        “直接”
       ],
-      "icon": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png"
+      "图标": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png"
     },
     {
       "name": "YouTube",
-      "type": "select",
+      "类型": "选择",
       "include-all": true,
-      "proxies": [
+      "代理"[
         "默认代理",
-        "DIRECT"
-      ],
-      "icon": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png"
+        “直接”
+],
+      "图标": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png"
     },
     {
       "name": "Google",
-      "type": "select",
+      "类型": "选择",
       "include-all": true,
-      "proxies": [
+      "代理": [
         "默认代理",
-        "DIRECT"
+        “直接”
       ],
-      "icon": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png"
+      "图标": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png"
     },
     {
       "name": "GoogleFCM",
-      "type": "select",
+      "类型": "选择",
       "include-all": true,
-      "proxies": [
+      "代理": [
         "默认代理",
-        "DIRECT"
+        “直接”
       ],
-      "icon": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png"
+      "图标": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png"
     },
     {
       "name": "ChatGPT",
-      "type": "select",
+      "类型": "选择",
       "include-all": true,
-      "proxies": [
+      "代理": [
         "默认代理",
         "DIRECT"
       ],
