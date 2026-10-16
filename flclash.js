@@ -28,7 +28,7 @@ function main(config) {
     },
     sniffer: {
       enable: true,
-      'force-dns-mapping': true,
+      'force-dns-mapping': false,
       'parse-pure-ip': true,
       sniff: {
         HTTP: {
