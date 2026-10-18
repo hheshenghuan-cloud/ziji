@@ -64,6 +64,7 @@ dns:
     - https://doh.pub/dns-query
   nameserver:
     - https://8.8.8.8/dns-query
+    - https://1.1.1.1/dns-query
   fake-ip-filter:
     - "+.push.apple.com"
     - "mtalk.google.com"
