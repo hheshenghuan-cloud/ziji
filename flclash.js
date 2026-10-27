@@ -62,7 +62,7 @@ function main(config) {
       'fake-ip-filter-mode': 'blacklist',
       'direct-nameserver-follow-policy': true,
       'nameserver-policy': {
-        'rule-set:googlefcm': ['https://8.8.8.8/dns-query#默认代理']
+        'rule-set:googlefcm': ['https://8.8.8.8/dns-query']
       },
       'default-nameserver': ['https://223.5.5.5/dns-query'],
       'proxy-server-nameserver': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'],
@@ -147,3 +147,4 @@ function main(config) {
   });
   return config;
 }
+
