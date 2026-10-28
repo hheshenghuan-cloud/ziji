@@ -71,24 +71,21 @@ function main(config) {
       'fake-ip-filter': ['+.push.apple.com', 'mtalk.google.com', 'rule-set:fakeipfilter_domain']
     },
     'proxy-groups': [
-      {name: '中转节点', type: 'select', 'include-all': true, proxies: ['DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Relay.png'},
-      {name: '落地节点', type: 'url-test', 'include-all': true, proxies: ['DIRECT'], url: 'https://www.gstatic.com/generate_204', interval: 300, tolerance: 50, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png'},
-      {name: '链式代理', type: 'relay', proxies: ['中转节点', '落地节点'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Stack.png'},
       {name: '默认代理', type: 'select', 'include-all': true, proxies: ['DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
-      {name: 'YouTube', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png'},
-      {name: 'Google', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png'},
-      {name: 'GoogleFCM', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
-      {name: 'ChatGPT', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png'},
-      {name: 'GitHub', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png'},
-      {name: 'OneDrive', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/OneDrive.png'},
-      {name: 'Microsoft', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png'},
-      {name: 'TikTok', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png'},
-      {name: 'APPLE', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png'},
-      {name: 'Telegram', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png'},
-      {name: 'NETFLIX', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png'},
-      {name: 'Disney', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney%2B.png'},
-      {name: '国内网络', type: 'select', 'include-all': true, proxies: ['DIRECT', '默认代理', '链式代理'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png'},
-      {name: '漏网之鱼', type: 'select', 'include-all': true, proxies: ['默认代理', '链式代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png'}
+      {name: 'YouTube', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png'},
+      {name: 'Google', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png'},
+      {name: 'GoogleFCM', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
+      {name: 'ChatGPT', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png'},
+      {name: 'GitHub', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png'},
+      {name: 'OneDrive', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/OneDrive.png'},
+      {name: 'Microsoft', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png'},
+      {name: 'TikTok', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png'},
+      {name: 'APPLE', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png'},
+      {name: 'Telegram', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png'},
+      {name: 'NETFLIX', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png'},
+      {name: 'Disney', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney%2B.png'},
+      {name: '国内网络', type: 'select', 'include-all': true, proxies: ['DIRECT', '默认代理'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png'},
+      {name: '漏网之鱼', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png'}
     ],
     rules: [
       'PROCESS-NAME,com.tencent.ig,默认代理',
@@ -150,3 +147,4 @@ function main(config) {
   });
   return config;
 }
+
