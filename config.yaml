@@ -35,6 +35,7 @@ sniffer:
     - Mijia Cloud
     - +.push.apple.com
     - mtalk.google.com
+    - diyhh.cn
 
 tun:
   enable: true
