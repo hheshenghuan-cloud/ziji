@@ -68,7 +68,7 @@ function main(config) {
       'proxy-server-nameserver': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'],
       'direct-nameserver': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'],
       nameserver: ['https://8.8.8.8/dns-query', 'https://1.1.1.1/dns-query'],
-      'fake-ip-filter': ['+.push.apple.com', 'mtalk.google.com', 'rule-set:fakeipfilter_domain']
+      'fake-ip-filter': ['+.push.apple.com', 'mtalk.google.com', 'rule-set:fakeipfilter_domain', 'diyhh.cn']
     },
     'proxy-groups': [
       {name: '默认代理', type: 'select', 'include-all': true, proxies: ['DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
