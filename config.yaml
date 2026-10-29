@@ -35,7 +35,6 @@ sniffer:
     - Mijia Cloud
     - +.push.apple.com
     - mtalk.google.com
-    - diyhh.cn
 
 tun:
   enable: true
@@ -70,7 +69,6 @@ dns:
     - +.push.apple.com
     - mtalk.google.com
     - rule-set:fakeipfilter_domain
-    - diyhh.cn
 
 proxy-groups:
   - {name: 默认代理, type: select, include-all: true, proxies: [DIRECT], icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png}
