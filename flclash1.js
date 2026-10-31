@@ -153,41 +153,42 @@ function main(config) {
 function addChainProxy(config) {
   const ENTRY = '链式前置';
   const EXIT = '链式出口';
-  const PREFIX = '【链式落地】';
   const PROVIDER_PREFIX = '__chain_exit__';
-  const nodes = (config.proxies || []).filter(node => !node.name.startsWith(PREFIX));
-  config.proxies = [...nodes, ...nodes.map(node => ({
-    ...node,
-    name: PREFIX + node.name,
-    'dialer-proxy': ENTRY
-  }))];
-
-  // 同时支持 proxy-providers 形式的节点订阅。
-  const providers = config['proxy-providers'] || {};
-  for (const [name, provider] of Object.entries(providers).filter(([name]) => !name.startsWith(PROVIDER_PREFIX))) {
-    providers[PROVIDER_PREFIX + name] = {
+  const nodes = config.proxies || [];
+  const providers = config['proxy-providers'] || (config['proxy-providers'] = {});
+  const originals = Object.keys(providers).filter(name => !name.startsWith(PROVIDER_PREFIX));
+  const exits = originals.map(name => PROVIDER_PREFIX + 'provider_' + name);
+  originals.forEach((name, index) => {
+    const provider = providers[name];
+    providers[exits[index]] = {
       ...provider,
       override: {
         ...provider.override,
         'override-expr': [
           ...((provider.override || {})['override-expr'] || []),
-          '.name = ' + JSON.stringify(PREFIX + name + ' / ') + ' + .name',
           '."dialer-proxy" = ' + JSON.stringify(ENTRY)
         ]
       }
     };
     if (provider.type === 'http') {
-      providers[PROVIDER_PREFIX + name].path = './proxy_providers/chain-' + encodeURIComponent(name) + '.yaml';
+      providers[exits[index]].path = './proxy_providers/chain-' + encodeURIComponent(name) + '.yaml';
     }
+  });
+  if (nodes.length) {
+    providers[PROVIDER_PREFIX + 'nodes'] = {
+      type: 'inline', payload: nodes.map(node => ({...node, 'dialer-proxy': ENTRY}))
+    };
+    exits.push(PROVIDER_PREFIX + 'nodes');
   }
-
   for (const group of config['proxy-groups']) {
-    group['exclude-filter'] = '^' + PREFIX;
+    group['include-all'] = false;
+    group['include-all-proxies'] = true;
+    group.use = originals;
     group.proxies.push(EXIT);
   }
   config['proxy-groups'].push(
-    {name: ENTRY, type: 'select', 'include-all': true, 'exclude-filter': '^' + PREFIX, 'empty-fallback': 'REJECT', icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
-    {name: EXIT, type: 'select', 'include-all': true, filter: '^' + PREFIX, 'empty-fallback': 'REJECT', icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'}
+    {name: ENTRY, type: 'select', 'include-all-proxies': true, use: originals, 'empty-fallback': 'REJECT', icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
+    {name: EXIT, type: 'select', use: exits, proxies: exits.length ? [] : ['REJECT'], 'empty-fallback': 'REJECT', icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'}
   );
   return config;
 }
