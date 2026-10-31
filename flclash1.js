@@ -4,7 +4,6 @@
  * 脚本接收订阅解析后的配置对象，并返回修改后的配置对象。
  * 已加入链式代理：设备 -> 链式前置 -> 链式出口 -> 网站。
  * 在两个链式组分别选择节点，再让默认代理或应用策略组选择“链式出口”。
- * 前置和出口均有 PNG 图标，固定放在所有策略组最底部。
  */
 function main(config) {
   config = config || {};
@@ -156,122 +155,39 @@ function addChainProxy(config) {
   const EXIT = '链式出口';
   const PREFIX = '【链式落地】';
   const PROVIDER_PREFIX = '__chain_exit__';
-  const clone = value => JSON.parse(JSON.stringify(value));
-  const groups = config['proxy-groups'];
-  const reserved = new Set([
-    'DIRECT', 'REJECT', 'REJECT-DROP', 'PASS', 'PASS-RULE', 'COMPATIBLE', 'GLOBAL',
-    ENTRY, EXIT, ...groups.map(group => group.name)
-  ]);
-  const isGenerated = proxy => proxy && typeof proxy.name === 'string'
-    && proxy.name.startsWith(PREFIX) && proxy['dialer-proxy'] === ENTRY;
-  const original = (Array.isArray(config.proxies) ? config.proxies : []).filter(proxy => !isGenerated(proxy));
-  const names = new Set();
-  for (const proxy of original) {
-    if (!proxy || typeof proxy.name !== 'string' || !proxy.name || names.has(proxy.name)
-      || reserved.has(proxy.name) || proxy.name.startsWith(PREFIX)) {
-      throw new Error('节点名为空、重复或与链式代理保留名称冲突：' + (proxy && proxy.name));
-    }
-    names.add(proxy.name);
-    if (proxy['dialer-proxy'] || proxy['underlying-proxy'] || proxy.detour) {
-      throw new Error('节点已有链式设置，请先确认原链路：' + proxy.name);
-    }
-  }
-  // DIRECT / REJECT 等并不是远程代理，不放进前置、出口候选列表。
-  const candidates = original.filter(proxy => proxy.server && proxy.port
-    && !['direct', 'reject', 'dns', 'pass'].includes(proxy.type));
-  const copies = candidates.map(proxy => ({
-    ...clone(proxy),
-    name: PREFIX + proxy.name,
+  const nodes = (config.proxies || []).filter(node => !node.name.startsWith(PREFIX));
+  config.proxies = [...nodes, ...nodes.map(node => ({
+    ...node,
+    name: PREFIX + node.name,
     'dialer-proxy': ENTRY
-  }));
+  }))];
 
-  // 订阅以 proxy-providers 提供时，复制 provider，而不是给组写 dialer-proxy。
-  // 保留原订阅来源；入口清除旧前置，出口副本施加独立的名字和前置设置。
-  const inputProviders = config['proxy-providers'] || {};
-  const providers = {};
-  const entryProviders = [];
-  const exitProviders = [];
-  for (const providerName of Object.keys(inputProviders)) {
-    const provider = inputProviders[providerName];
-    if (providerName.startsWith(PROVIDER_PREFIX)) {
-      const previous = provider.override || {};
-      if (previous['dialer-proxy'] === ENTRY) continue;
-      throw new Error('订阅名称使用了链式代理保留前缀：' + providerName);
-    }
-    if (!provider || !['http', 'file', 'inline'].includes(provider.type)) {
-      throw new Error('不支持的节点订阅类型：' + providerName);
-    }
-    const overrides = provider.override || {};
-    if (provider['dialer-proxy'] || overrides['dialer-proxy']) {
-      throw new Error('节点订阅已有链式设置，请先确认原链路：' + providerName);
-    }
-    const expressions = overrides['override-expr'] || [];
-    if (!Array.isArray(expressions)) {
-      throw new Error('订阅 override-expr 必须为数组：' + providerName);
-    }
-    // 外部订阅的原始节点无法在本脚本中逐条读取；入口明确清除旧前置，
-    // 避免原订阅内已有 dialer-proxy 时意外形成循环。
-    const clearEntryDialer = '."dialer-proxy" = ""';
-    const entryProvider = clone(provider);
-    entryProvider.override = {
-      ...clone(overrides),
-      'override-expr': expressions.includes(clearEntryDialer) ? expressions.slice() : [...expressions, clearEntryDialer]
+  // 同时支持 proxy-providers 形式的节点订阅。
+  const providers = config['proxy-providers'] || {};
+  for (const [name, provider] of Object.entries(providers).filter(([name]) => !name.startsWith(PROVIDER_PREFIX))) {
+    providers[PROVIDER_PREFIX + name] = {
+      ...provider,
+      override: {
+        ...provider.override,
+        'override-expr': [
+          ...((provider.override || {})['override-expr'] || []),
+          '.name = ' + JSON.stringify(PREFIX + name + ' / ') + ' + .name',
+          '."dialer-proxy" = ' + JSON.stringify(ENTRY)
+        ]
+      }
     };
-    providers[providerName] = entryProvider;
-    entryProviders.push(providerName);
-
-    const copy = clone(provider);
-    const copyName = PROVIDER_PREFIX + providerName;
-    // 保留原有的重命名、UDP、TLS 等覆盖项；最后再固定前缀及链路方向。
-    copy.override = {
-      ...clone(overrides),
-      'dialer-proxy': ENTRY,
-      'override-expr': [
-        ...expressions.filter(expression => expression !== clearEntryDialer),
-        '.name = ' + JSON.stringify(PREFIX + providerName + ' / ') + ' + .name',
-        '."dialer-proxy" = ' + JSON.stringify(ENTRY)
-      ]
-    };
-    // HTTP 副本使用独立缓存文件；file provider 只读同一份原始节点文件。
-    if (copy.type === 'http') {
-      const cacheKey = providerName.split('').map(character => character.charCodeAt(0).toString(16)).join('-');
-      copy.path = './proxy_providers/chain-exit-' + cacheKey + '.yaml';
+    if (provider.type === 'http') {
+      providers[PROVIDER_PREFIX + name].path = './proxy_providers/chain-' + encodeURIComponent(name) + '.yaml';
     }
-    providers[copyName] = copy;
-    exitProviders.push(copyName);
   }
 
-  config.proxies = [...original, ...copies];
-  if (Object.keys(providers).length) config['proxy-providers'] = providers;
-  const entryNames = candidates.map(proxy => proxy.name);
-  const exitNames = copies.map(proxy => proxy.name);
-  const normalNames = original.map(proxy => proxy.name);
-  const normalGroups = groups.filter(group => group.name !== ENTRY && group.name !== EXIT);
-  for (const group of normalGroups) {
-    // 限定普通分组只枚举原节点，出口副本只显示在链式出口组内。
-    delete group['include-all'];
-    delete group['include-all-proxies'];
-    delete group['include-all-providers'];
-    group.proxies = [...new Set([...(group.proxies || []), EXIT, ...normalNames])];
-    if (entryProviders.length) group.use = entryProviders.slice();
+  for (const group of config['proxy-groups']) {
+    group['exclude-filter'] = '^' + PREFIX;
+    group.proxies.push(EXIT);
   }
-  const entryGroup = {
-    name: ENTRY,
-    type: 'select',
-    proxies: entryNames.length || entryProviders.length ? entryNames : ['REJECT'],
-    'empty-fallback': 'REJECT',
-    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'
-  };
-  const exitGroup = {
-    name: EXIT,
-    type: 'select',
-    proxies: exitNames.length || exitProviders.length ? exitNames : ['REJECT'],
-    'empty-fallback': 'REJECT',
-    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'
-  };
-  if (entryProviders.length) entryGroup.use = entryProviders;
-  if (exitProviders.length) exitGroup.use = exitProviders;
-  // 显示顺序：原有全部分组 -> 链式前置 -> 链式出口。
-  config['proxy-groups'] = [...normalGroups, entryGroup, exitGroup];
+  config['proxy-groups'].push(
+    {name: ENTRY, type: 'select', 'include-all': true, 'exclude-filter': '^' + PREFIX, 'empty-fallback': 'REJECT', icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
+    {name: EXIT, type: 'select', 'include-all': true, filter: '^' + PREFIX, 'empty-fallback': 'REJECT', icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'}
+  );
   return config;
 }
