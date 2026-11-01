@@ -2,6 +2,8 @@
  * FlClash / Mihomo 配置脚本
  * 用法：在 FlClash 的脚本配置中导入本文件，然后将其应用到订阅配置。
  * 脚本接收订阅解析后的配置对象，并返回修改后的配置对象。
+ * 已加入链式代理：设备 -> 链式前置 -> 链式出口 -> 网站。
+ * 在两个链式组分别选择节点，再让默认代理或应用策略组选择“链式出口”。
  */
 function main(config) {
   config = config || {};
@@ -149,9 +151,9 @@ function main(config) {
 }
 
 function addChainProxy(config) {
-  const ENTRY = '中转';
-  const EXIT = '出口';
-  const PREFIX = '【出口】';
+  const ENTRY = '链式前置';
+  const EXIT = '链式出口';
+  const PREFIX = '【落地】';
   const PROVIDER_PREFIX = '__chain_exit__';
   const nodes = (config.proxies || []).filter(node => !node.name.startsWith(PREFIX));
   config.proxies = [...nodes, ...nodes.map(node => ({
