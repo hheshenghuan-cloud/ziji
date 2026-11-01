@@ -145,6 +145,47 @@ function main(config) {
       apple_ip: {type: 'http', interval: 86400, behavior: 'ipcidr', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs'}
     }
   });
-  return config;
+  return addChainProxy(config);
 }
 
+function addChainProxy(config) {
+  const ENTRY = '中转';
+  const EXIT = '出口';
+  const PREFIX = '【出口】';
+  const PROVIDER_PREFIX = '__chain_exit__';
+  const nodes = (config.proxies || []).filter(node => !node.name.startsWith(PREFIX));
+  config.proxies = [...nodes, ...nodes.map(node => ({
+    ...node,
+    name: PREFIX + node.name,
+    'dialer-proxy': ENTRY
+  }))];
+
+  // 同时支持 proxy-providers 形式的节点订阅。
+  const providers = config['proxy-providers'] || {};
+  for (const [name, provider] of Object.entries(providers).filter(([name]) => !name.startsWith(PROVIDER_PREFIX))) {
+    providers[PROVIDER_PREFIX + name] = {
+      ...provider,
+      override: {
+        ...provider.override,
+        'override-expr': [
+          ...((provider.override || {})['override-expr'] || []),
+          '.name = ' + JSON.stringify(PREFIX + name + ' / ') + ' + .name',
+          '."dialer-proxy" = ' + JSON.stringify(ENTRY)
+        ]
+      }
+    };
+    if (provider.type === 'http') {
+      providers[PROVIDER_PREFIX + name].path = './proxy_providers/chain-' + encodeURIComponent(name) + '.yaml';
+    }
+  }
+
+  for (const group of config['proxy-groups']) {
+    group['exclude-filter'] = '^' + PREFIX;
+    group.proxies.push(EXIT);
+  }
+  config['proxy-groups'].push(
+    {name: ENTRY, type: 'select', 'include-all': true, 'exclude-filter': '^' + PREFIX, 'empty-fallback': 'REJECT', icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
+    {name: EXIT, type: 'select', 'include-all': true, filter: '^' + PREFIX, 'empty-fallback': 'REJECT', icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'}
+  );
+  return config;
+}
