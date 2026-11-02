@@ -90,15 +90,15 @@ function main(config) {
       {name: '漏网之鱼', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png'}
     ],
     rules: [
-      'PROCESS-NAME,com.tencent.ig,默认代理',
       'RULE-SET,ziji,默认代理',
       'RULE-SET,private_ip,国内网络,no-resolve',
       'RULE-SET,private_domain,国内网络',
       'RULE-SET,cn_domain,国内网络',
       'RULE-SET,cn_ip,国内网络',
       'RULE-SET,zijign,国内网络',
-      'RULE-SET,googlefcm,GoogleFCM',
       'RULE-SET,fakeipfilter_domain,国内网络',
+      'RULE-SET,googlefcm,GoogleFCM',
+      'AND,((DST-PORT,443),(NETWORK,UDP)),REJECT',
       'RULE-SET,ai,ChatGPT',
       'RULE-SET,github_domain,GitHub',
       'RULE-SET,youtube_domain,YouTube',
