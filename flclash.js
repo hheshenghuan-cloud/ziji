@@ -145,5 +145,5 @@ function main(config) {
       apple_ip: {type: 'http', interval: 86400, behavior: 'ipcidr', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs'}
     }
   });
-  return addChainProxy(config);
+  return (config);
 }
