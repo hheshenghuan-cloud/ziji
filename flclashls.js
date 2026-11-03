@@ -2,6 +2,8 @@
  * FlClash / Mihomo 配置脚本
  * 用法：在 FlClash 的脚本配置中导入本文件，然后将其应用到订阅配置。
  * 脚本接收订阅解析后的配置对象，并返回修改后的配置对象。
+ * 已加入链式代理：设备 -> 链式前置 -> 链式出口 -> 网站。
+ * 在两个链式组分别选择节点，再让默认代理或应用策略组选择“链式出口”。
  */
 function main(config) {
   config = config || {};
@@ -88,15 +90,15 @@ function main(config) {
       {name: '漏网之鱼', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png'}
     ],
     rules: [
-      'PROCESS-NAME,com.tencent.ig,默认代理',
       'RULE-SET,ziji,默认代理',
       'RULE-SET,private_ip,国内网络,no-resolve',
       'RULE-SET,private_domain,国内网络',
       'RULE-SET,cn_domain,国内网络',
       'RULE-SET,cn_ip,国内网络',
       'RULE-SET,zijign,国内网络',
-      'RULE-SET,googlefcm,GoogleFCM',
       'RULE-SET,fakeipfilter_domain,国内网络',
+      'RULE-SET,googlefcm,GoogleFCM',
+      'AND,((DST-PORT,443),(NETWORK,UDP)),REJECT',
       'RULE-SET,ai,ChatGPT',
       'RULE-SET,github_domain,GitHub',
       'RULE-SET,youtube_domain,YouTube',
@@ -147,4 +149,3 @@ function main(config) {
   });
   return config;
 }
-
