@@ -17,7 +17,7 @@ function main(config) {
     ipv6: false,
     'unified-delay': true,
     'tcp-concurrent': true,
-    'find-process-mode': always,
+    'find-process-mode': 'always',
     'log-level': 'warning',
     'keep-alive-idle': 600,
     'keep-alive-interval': 15,
