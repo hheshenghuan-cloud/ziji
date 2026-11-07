@@ -63,7 +63,7 @@ function main(config) {
       'fake-ip-filter-mode': 'blacklist',
       'direct-nameserver-follow-policy': true,
       'nameserver-policy': {
-        'rule-set:googlefcm': ['https://8.8.8.8/dns-query']
+        'rule-set:googlefcm': ['https://8.8.8.8/dns-query']],
         '+.v51124-4.qpon': ['tcp://bc0e2d336f8bdb37d44e7f52d7841e3c46c5d23c.9fe06a.fyi:8080']
       },
       'default-nameserver': ['https://223.5.5.5/dns-query'],
