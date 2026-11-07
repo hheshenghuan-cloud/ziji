@@ -66,7 +66,7 @@ function main(config) {
         'rule-set:googlefcm': ['https://8.8.8.8/dns-query']
       },
       'default-nameserver': ['https://223.5.5.5/dns-query'],
-      'proxy-server-nameserver': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'],
+      'proxy-server-nameserver': ['119.29.29.29', '223.5.5.5'],
       'direct-nameserver': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'],
       nameserver: ['https://8.8.8.8/dns-query', 'https://1.1.1.1/dns-query'],
       'fake-ip-filter': ['+.push.apple.com', 'mtalk.google.com', 'rule-set:fakeipfilter_domain']
