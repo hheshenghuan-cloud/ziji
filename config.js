@@ -58,7 +58,7 @@ function main(config) {
       listen: '0.0.0.0:1053',
       ipv6: false,
       'respect-rules': true,
-      'enhanced-mode': 'fake-ip',
+      'enhanced-mode': 'Redir-Host',
       'fake-ip-range': '198.18.0.1/16',
       'fake-ip-filter-mode': 'blacklist',
       'direct-nameserver-follow-policy': true,
