@@ -12,11 +12,11 @@ function main(config) {
     'mixed-port': 7890,
     'socks-port': 7891,
     'redir-port': 7892,
-    port: 7893,
+    'port': 7893,
     'tproxy-port': 7894,
     'allow-lan': true,
     'bind-address': '*',
-    ipv6: false,
+    'ipv6': false,
     'unified-delay': true,
     'tcp-concurrent': true,
     'find-process-mode': 'always',
@@ -24,41 +24,41 @@ function main(config) {
     'keep-alive-idle': 600,
     'keep-alive-interval': 15,
     'external-controller': '0.0.0.0:9090',
-    secret: 'diyhh',
-    profile: {
+    'secret': 'diyhh',
+    'profile': {
       'store-selected': true,
       'store-fake-ip': true
     },
-    sniffer: {
-      enable: true,
+    'sniffer': {
+      'enable': true,
       'force-dns-mapping': false,
       'parse-pure-ip': true,
-      sniff: {
-        HTTP: {
-          ports: [80, '8080-8880'],
+      'sniff': {
+        'HTTP': {
+          'ports': [80, '8080-8880'],
           'override-destination': false
         },
-        TLS: {
-          ports: [443, 8443],
+        'TLS': {
+          'ports': [443, 8443],
           'override-destination': false
         },
-        QUIC: {
-          ports: [443, 8443],
+        'QUIC': {
+          'ports': [443, 8443],
           'override-destination': false
         }
       },
       'skip-domain': ['Mijia Cloud', '+.push.apple.com', 'mtalk.google.com']
     },
-    tun: {
-      enable: true,
-      stack: 'mixed',
+    'tun': {
+      'enable': true,
+      'stack': 'mixed',
       'dns-hijack': ['any:53', 'tcp://any:53']
     },
-    dns: {
-      enable: true,
+    'dns': {
+      'enable': true,
       'cache-algorithm': 'arc',
-      listen: '0.0.0.0:1053',
-      ipv6: false,
+      'listen': '0.0.0.0:1053',
+      'ipv6': false,
       'respect-rules': true,
       'enhanced-mode': 'fake-ip',
       'fake-ip-range': '198.18.0.1/16',
@@ -75,23 +75,23 @@ function main(config) {
       'fake-ip-filter': ['+.push.apple.com', 'mtalk.google.com', 'rule-set:fakeipfilter_domain']
     },
     'proxy-groups': [
-      {name: '默认代理', type: 'select', 'include-all': true, proxies: ['DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
-      {name: 'YouTube', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png'},
-      {name: 'Google', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png'},
-      {name: 'GoogleFCM', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
-      {name: 'ChatGPT', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png'},
-      {name: 'GitHub', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png'},
-      {name: 'OneDrive', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/OneDrive.png'},
-      {name: 'Microsoft', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png'},
-      {name: 'TikTok', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png'},
-      {name: 'APPLE', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png'},
-      {name: 'Telegram', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png'},
-      {name: 'NETFLIX', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png'},
-      {name: 'Disney', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney%2B.png'},
-      {name: '国内网络', type: 'select', 'include-all': true, proxies: ['DIRECT', '默认代理'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png'},
-      {name: '漏网之鱼', type: 'select', 'include-all': true, proxies: ['默认代理', 'DIRECT'], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png'}
+      {'name': '默认代理', 'type': 'select', 'include-all': true, 'proxies': ['DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
+      {'name': 'YouTube', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png'},
+      {'name': 'Google', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png'},
+      {'name': 'GoogleFCM', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
+      {'name': 'ChatGPT', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png'},
+      {'name': 'GitHub', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png'},
+      {'name': 'OneDrive', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/OneDrive.png'},
+      {'name': 'Microsoft', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png'},
+      {'name': 'TikTok', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png'},
+      {'name': 'APPLE', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png'},
+      {'name': 'Telegram', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png'},
+      {'name': 'NETFLIX', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png'},
+      {'name': 'Disney', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney%2B.png'},
+      {'name': '国内网络', 'type': 'select', 'include-all': true, 'proxies': ['DIRECT', '默认代理'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png'},
+      {'name': '漏网之鱼', 'type': 'select', 'include-all': true, 'proxies': ['默认代理', 'DIRECT'], 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png'}
     ],
-    rules: [
+    'rules': [
       'DOMAIN-SUFFIX,fxltsbl.com,REJECT',
       'RULE-SET,ziji,默认代理',
       'RULE-SET,private_ip,国内网络,no-resolve',
@@ -122,32 +122,32 @@ function main(config) {
       'MATCH,漏网之鱼'
     ],
     'rule-providers': {
-      ziji: {type: 'http', interval: 86400, behavior: 'domain', format: 'yaml', url: 'https://raw.githubusercontent.com/hheshenghuan-cloud/ziji/main/ziji.yaml'},
-      zijign: {type: 'http', interval: 86400, behavior: 'domain', format: 'yaml', url: 'https://raw.githubusercontent.com/hheshenghuan-cloud/ziji/main/zijign.yaml'},
-      googlefcm: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.mrs'},
-      fakeipfilter_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/DustinWin/ruleset_geodata/mihomo-ruleset/fakeip-filter.mrs'},
-      private_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs'},
-      proxylite: {type: 'http', interval: 86400, behavior: 'classical', format: 'text', url: 'https://raw.githubusercontent.com/qichiyuhub/rule/main/rules/proxy.list'},
-      ai: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs'},
-      youtube_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs'},
-      google_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs'},
-      github_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs'},
-      telegram_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs'},
-      netflix_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs'},
-      onedrive_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs'},
-      microsoft_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs'},
-      apple_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs'},
-      speedtest_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs'},
-      tiktok_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs'},
-      'geolocation-!cn': {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs'},
-      cn_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs'},
-      disney_domain: {type: 'http', interval: 86400, behavior: 'domain', format: 'mrs', url: 'https://raw.githubusercontent.com/GitMetaio/rule/refs/heads/master/rule/Clash/Disney/Disney_OCD_Domain.mrs'},
-      private_ip: {type: 'http', interval: 86400, behavior: 'ipcidr', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs'},
-      cn_ip: {type: 'http', interval: 86400, behavior: 'ipcidr', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs'},
-      google_ip: {type: 'http', interval: 86400, behavior: 'ipcidr', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs'},
-      telegram_ip: {type: 'http', interval: 86400, behavior: 'ipcidr', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs'},
-      netflix_ip: {type: 'http', interval: 86400, behavior: 'ipcidr', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs'},
-      apple_ip: {type: 'http', interval: 86400, behavior: 'ipcidr', format: 'mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs'}
+      'ziji': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'yaml', 'url': 'https://raw.githubusercontent.com/hheshenghuan-cloud/ziji/main/ziji.yaml'},
+      'zijign': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'yaml', 'url': 'https://raw.githubusercontent.com/hheshenghuan-cloud/ziji/main/zijign.yaml'},
+      'googlefcm': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.mrs'},
+      'fakeipfilter_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/DustinWin/ruleset_geodata/mihomo-ruleset/fakeip-filter.mrs'},
+      'private_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs'},
+      'proxylite': {'type': 'http', 'interval': 86400, 'behavior': 'classical', 'format': 'text', 'url': 'https://raw.githubusercontent.com/qichiyuhub/rule/main/rules/proxy.list'},
+      'ai': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs'},
+      'youtube_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs'},
+      'google_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs'},
+      'github_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs'},
+      'telegram_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs'},
+      'netflix_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs'},
+      'onedrive_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs'},
+      'microsoft_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs'},
+      'apple_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs'},
+      'speedtest_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs'},
+      'tiktok_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs'},
+      'geolocation-!cn': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs'},
+      'cn_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs'},
+      'disney_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/GitMetaio/rule/refs/heads/master/rule/Clash/Disney/Disney_OCD_Domain.mrs'},
+      'private_ip': {'type': 'http', 'interval': 86400, 'behavior': 'ipcidr', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs'},
+      'cn_ip': {'type': 'http', 'interval': 86400, 'behavior': 'ipcidr', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs'},
+      'google_ip': {'type': 'http', 'interval': 86400, 'behavior': 'ipcidr', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs'},
+      'telegram_ip': {'type': 'http', 'interval': 86400, 'behavior': 'ipcidr', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs'},
+      'netflix_ip': {'type': 'http', 'interval': 86400, 'behavior': 'ipcidr', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs'},
+      'apple_ip': {'type': 'http', 'interval': 86400, 'behavior': 'ipcidr', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs'}
     }
   });
   return addChainProxy(config);
@@ -161,7 +161,7 @@ function addChainProxy(config) {
   const nodes = (config.proxies || []).filter(node => !node.name.startsWith(PREFIX));
   config.proxies = [...nodes, ...nodes.map(node => ({
     ...node,
-    name: PREFIX + node.name,
+    'name': PREFIX + node.name,
     'dialer-proxy': ENTRY
   }))];
 
@@ -170,7 +170,7 @@ function addChainProxy(config) {
   for (const [name, provider] of Object.entries(providers).filter(([name]) => !name.startsWith(PROVIDER_PREFIX))) {
     providers[PROVIDER_PREFIX + name] = {
       ...provider,
-      override: {
+      'override': {
         ...provider.override,
         'override-expr': [
           ...((provider.override || {})['override-expr'] || []),
@@ -189,8 +189,8 @@ function addChainProxy(config) {
     group.proxies.push(EXIT);
   }
   config['proxy-groups'].push(
-    {name: ENTRY, type: 'select', 'include-all': true, 'exclude-filter': '^' + PREFIX, 'empty-fallback': 'REJECT', icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
-    {name: EXIT, type: 'select', 'include-all': true, filter: '^' + PREFIX, 'empty-fallback': 'REJECT', icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'}
+    {'name': ENTRY, 'type': 'select', 'include-all': true, 'exclude-filter': '^' + PREFIX, 'empty-fallback': 'REJECT', 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png'},
+    {'name': EXIT, 'type': 'select', 'include-all': true, 'filter': '^' + PREFIX, 'empty-fallback': 'REJECT', 'icon': 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'}
   );
   return config;
 }
