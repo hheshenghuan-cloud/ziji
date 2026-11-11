@@ -69,8 +69,9 @@ function main(config) {
       },
       'default-nameserver': ['https://223.5.5.5/dns-query'],
       'proxy-server-nameserver': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'],
+      'proxy-server-nameserver-policy': {'+.v51124-4.qpon': ['tcp://bc0e2d336f8bdb37d44e7f52d7841e3c46c5d23c.9fe06a.fyi:8080']},
       'direct-nameserver': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'],
-      nameserver: ['https://8.8.8.8/dns-query', 'https://1.1.1.1/dns-query'],
+      'nameserver': ['https://8.8.8.8/dns-query', 'https://1.1.1.1/dns-query'],
       'fake-ip-filter': ['+.push.apple.com', 'mtalk.google.com', 'rule-set:fakeipfilter_domain']
     },
     'proxy-groups': [
