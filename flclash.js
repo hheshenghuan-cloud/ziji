@@ -9,6 +9,7 @@ function main(config) {
   config = config || {};
 
   Object.assign(config, {
+    'geodata-mode': true,
     'mixed-port': 7890,
     'socks-port': 7891,
     'redir-port': 7892,
@@ -71,7 +72,12 @@ function main(config) {
       'proxy-server-nameserver': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'],
       'proxy-server-nameserver-policy': {'+.v51124-4.qpon': ['tcp://bc0e2d336f8bdb37d44e7f52d7841e3c46c5d23c.9fe06a.fyi:8080']},
       'direct-nameserver': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'],
-      'nameserver': ['https://8.8.8.8/dns-query', 'https://1.1.1.1/dns-query'],
+      'nameserver': ['https://8.8.8.8/dns-query&ecs=223.5.5.0/24'],
+      'fallback': ['https://8.8.8.8/dns-query'],
+      'fallback-filter': {
+        'geoip': true,
+        'geoip-code': 'CN'
+      },
       'fake-ip-filter': ['+.push.apple.com', 'mtalk.google.com', 'rule-set:fakeipfilter_domain']
     },
     'proxy-groups': [
@@ -100,8 +106,8 @@ function main(config) {
       'RULE-SET,cn_ip,国内网络',
       'RULE-SET,zijign,国内网络',
       'RULE-SET,fakeipfilter_domain,国内网络',
+      'AND,((RULE-SET,cn!_domain),(DST-PORT,443),(NETWORK,UDP)),REJECT',
       'RULE-SET,googlefcm,GoogleFCM',
-      'AND,((DST-PORT,443),(NETWORK,UDP)),REJECT',
       'RULE-SET,ai,ChatGPT',
       'RULE-SET,github_domain,GitHub',
       'RULE-SET,youtube_domain,YouTube',
@@ -122,6 +128,7 @@ function main(config) {
       'MATCH,漏网之鱼'
     ],
     'rule-providers': {
+      'cn!_domain': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs'},
       'ziji': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'yaml', 'url': 'https://raw.githubusercontent.com/hheshenghuan-cloud/ziji/main/ziji.yaml'},
       'zijign': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'yaml', 'url': 'https://raw.githubusercontent.com/hheshenghuan-cloud/ziji/main/zijign.yaml'},
       'googlefcm': {'type': 'http', 'interval': 86400, 'behavior': 'domain', 'format': 'mrs', 'url': 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/googlefcm.mrs'},
