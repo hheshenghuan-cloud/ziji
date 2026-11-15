@@ -65,7 +65,7 @@ function main(config) {
       'fake-ip-filter-mode': 'blacklist',
       'direct-nameserver-follow-policy': true,
       'nameserver-policy': {
-        'rule-set:googlefcm': ['https://8.8.8.8/dns-query#ecs=103.123.144.0/24&ecs-override=true']
+        'rule-set:googlefcm': ['https://8.8.8.8/dns-query']
       },
       'default-nameserver': ['https://223.5.5.5/dns-query'],
       'proxy-server-nameserver': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'],
