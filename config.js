@@ -29,7 +29,7 @@ function main(config) {
     },
     'sniffer': {
       'enable': true,
-      'force-dns-mapping': false,
+      'force-dns-mapping': true,
       'parse-pure-ip': true,
       'sniff': {
         'HTTP': {
