@@ -36,15 +36,15 @@ function main(config) {
       sniff: {
         HTTP: {
           ports: [80, '8080-8880'],
-          'override-destination': false
+          'override-destination': true
         },
         TLS: {
           ports: [443, 8443],
-          'override-destination': false
+          'override-destination': true
         },
         QUIC: {
           ports: [443, 8443],
-          'override-destination': false
+          'override-destination': true
         }
       },
       'skip-domain': ['Mijia Cloud', '+.push.apple.com', 'mtalk.google.com']
